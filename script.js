@@ -69,7 +69,7 @@ function generateGrid() {
     const totalTiles = gridSize * gridSize;
 
     // Set grid columns
-    gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+    gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, minmax(0, 1fr))`;
     
     // Set tile font size based on grid size and screen size (smaller grids = larger text, larger screens = larger text)
     const viewportScale = Math.min(window.innerWidth * 0.9, window.innerHeight * 0.8) / 600; // Scale based on available board space

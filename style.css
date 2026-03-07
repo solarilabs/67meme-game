@@ -210,10 +210,9 @@ body {
     background: rgba(0, 0, 0, 0.15);
     border-radius: 20px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
-    max-width: 95vw;
-    max-height: 80vh;
-    width: min(90vw, 80vh);
+    width: min(90vw, 90vh);
     margin: auto;
+    box-sizing: border-box;
     justify-content: center;
     align-content: center;
     overflow: hidden;
@@ -471,5 +470,12 @@ body {
 
     .game-info p {
         font-size: 1rem;
+    }
+}
+
+/* MOBILE OPTIMIZATIONS */
+@media (max-width: 600px) {
+    .grid {
+        gap: 4px;
     }
 }

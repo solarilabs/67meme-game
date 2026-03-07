@@ -65,7 +65,7 @@ function generateGrid() {
     gridContainer.innerHTML = '';
     gameState.tiles = [];
 
-    const gridSize = 3 + gameState.currentLevel - 1; // 3x3, 4x4, 5x5, etc.
+    const gridSize = Math.min(8, 2 + gameState.currentLevel); // 3x3, 4x4, 5x5, 6x6, 7x7, 8x8 max
     const totalTiles = gridSize * gridSize;
 
     // Set grid columns
@@ -125,7 +125,7 @@ function handleTileClick(tile, index) {
         setTimeout(() => {
             gameState.currentLevel++;
             gameState.timeRemaining = gameState.maxTime;
-            gameState.maxTime = Math.max(10, gameState.maxTime - 1); // Decrease time each level
+            gameState.maxTime = Math.max(8, gameState.maxTime - 0.3); // Gradually decrease time for higher difficulty
             gameState.isGameRunning = true;
             generateGrid();
         }, 600);
@@ -142,6 +142,9 @@ function handleTileClick(tile, index) {
 function startTimer() {
     gameState.timeRemaining = gameState.maxTime;
     updateTimerBar();
+
+    // Set smooth transition matching the update interval
+    timerBar.style.transition = 'width 0.016s linear';
 
     gameState.timerInterval = setInterval(() => {
         gameState.timeRemaining -= 0.016; // ~60fps
@@ -191,6 +194,8 @@ function resetGame() {
     clearInterval(gameState.timerInterval);
     gridContainer.innerHTML = '';
     gameState.tiles = [];
+    timerBar.style.width = '100%';
+    timerBar.style.transition = 'none';
 }
 
 // Initialize high score display on page load

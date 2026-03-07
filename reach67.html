@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reach 67</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #FF69B4 75%, #FF4500 100%);
+            background-size: 400% 400%;
+            animation: backgroundShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        @keyframes backgroundShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .screen {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        /* HOME SCREEN */
+        .home-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 60px 80px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .home-title {
+            font-size: 4rem;
+            background: linear-gradient(135deg, #FFD700, #FF4500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .home-subtitle {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        /* GAME SCREEN */
+        .game-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            padding: 40px;
+        }
+
+        .game-info {
+            display: flex;
+            gap: 40px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 1.2rem;
+        }
+
+        .number-display {
+            font-size: 8rem;
+            font-weight: 900;
+            color: white;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            padding: 40px 60px;
+            min-width: 300px;
+            text-align: center;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .stop-btn {
+            padding: 20px 60px;
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #FF0000, #FF4500);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .stop-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(255, 0, 0, 0.6);
+        }
+
+        .stop-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* RESULT SCREEN */
+        .result-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 60px 80px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .result-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .result-message {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .perfect {
+            color: #00C853;
+        }
+
+        .failed {
+            color: #FF0000;
+        }
+
+        /* BUTTONS */
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #333;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 165, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #667EEA, #764BA2);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+            .home-card {
+                padding: 40px 30px;
+                max-width: 90vw;
+            }
+
+            .home-title {
+                font-size: 2.5rem;
+            }
+
+            .home-subtitle {
+                font-size: 1rem;
+            }
+
+            .number-display {
+                font-size: 6rem;
+                padding: 30px 40px;
+                min-width: 250px;
+            }
+
+            .stop-btn {
+                padding: 15px 40px;
+                font-size: 1.5rem;
+            }
+
+            .game-info {
+                gap: 20px;
+                font-size: 1rem;
+            }
+
+            .result-card {
+                padding: 40px 30px;
+                max-width: 90vw;
+            }
+
+            .result-title {
+                font-size: 2rem;
+            }
+
+            .result-message {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HOME SCREEN -->
+    <div id="homeScreen" class="screen active">
+        <div class="home-card">
+            <h1 class="home-title">Reach 67</h1>
+            <p class="home-subtitle">Stop the counter exactly at 67 to advance!</p>
+            <button id="startGameBtn" class="btn btn-primary">Start Game</button>
+        </div>
+    </div>
+
+    <!-- GAME SCREEN -->
+    <div id="gameScreen" class="screen">
+        <div class="game-content">
+            <div class="game-info">
+                <div>Level: <span id="levelDisplay">1</span></div>
+                <div>Score: <span id="scoreDisplay">0</span></div>
+            </div>
+            <div id="numberDisplay" class="number-display">0</div>
+            <button id="stopBtn" class="stop-btn">STOP</button>
+        </div>
+    </div>
+
+    <!-- RESULT SCREEN -->
+    <div id="resultScreen" class="screen">
+        <div class="result-card">
+            <h2 id="resultTitle" class="result-title">Result</h2>
+            <p id="resultMessage" class="result-message">Message</p>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button id="playAgainBtn" class="btn btn-primary">Play Again</button>
+                <button id="homeBtn" class="btn btn-secondary">Home</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        const gameState = {
+            currentLevel: 1,
+            score: 0,
+            currentNumber: 0,
+            isRunning: false,
+            interval: null,
+            baseSpeed: 120, // Starting speed in ms
+            speedDecrease: 5 // Speed decrease per level in ms
+        };
+
+        // DOM Elements
+        const homeScreen = document.getElementById('homeScreen');
+        const gameScreen = document.getElementById('gameScreen');
+        const resultScreen = document.getElementById('resultScreen');
+
+        const startGameBtn = document.getElementById('startGameBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const playAgainBtn = document.getElementById('playAgainBtn');
+        const homeBtn = document.getElementById('homeBtn');
+
+        const levelDisplay = document.getElementById('levelDisplay');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const numberDisplay = document.getElementById('numberDisplay');
+        const resultTitle = document.getElementById('resultTitle');
+        const resultMessage = document.getElementById('resultMessage');
+
+        // Event Listeners
+        startGameBtn.addEventListener('click', startGame);
+        stopBtn.addEventListener('click', stopCounter);
+        playAgainBtn.addEventListener('click', () => {
+            resetGame();
+            startGame();
+        });
+        homeBtn.addEventListener('click', () => {
+            resetGame();
+            showScreen('home');
+        });
+
+        // Screen Management
+        function showScreen(screenName) {
+            homeScreen.classList.remove('active');
+            gameScreen.classList.remove('active');
+            resultScreen.classList.remove('active');
+
+            if (screenName === 'home') {
+                homeScreen.classList.add('active');
+            } else if (screenName === 'game') {
+                gameScreen.classList.add('active');
+            } else if (screenName === 'result') {
+                resultScreen.classList.add('active');
+            }
+        }
+
+        // Start Game
+        function startGame() {
+            showScreen('game');
+            gameState.isRunning = true;
+            gameState.currentNumber = 0;
+            numberDisplay.textContent = '0';
+
+            // Calculate speed for current level
+            const speed = Math.max(50, gameState.baseSpeed - (gameState.currentLevel - 1) * gameState.speedDecrease);
+
+            gameState.interval = setInterval(() => {
+                gameState.currentNumber++;
+                numberDisplay.textContent = gameState.currentNumber;
+
+                if (gameState.currentNumber >= 100) {
+                    // Auto-stop at 100 if player didn't stop
+                    stopCounter();
+                }
+            }, speed);
+        }
+
+        // Stop Counter
+        function stopCounter() {
+            if (!gameState.isRunning) return;
+
+            gameState.isRunning = false;
+            clearInterval(gameState.interval);
+
+            if (gameState.currentNumber === 67) {
+                // Perfect stop!
+                gameState.score++;
+                gameState.currentLevel++;
+                scoreDisplay.textContent = gameState.score;
+                levelDisplay.textContent = gameState.currentLevel;
+
+                resultTitle.textContent = 'Perfect!';
+                resultTitle.className = 'result-title perfect';
+                resultMessage.textContent = 'You hit exactly 67!';
+                resultMessage.className = 'result-message perfect';
+            } else {
+                // Wrong number
+                resultTitle.textContent = 'Game Over';
+                resultTitle.className = 'result-title failed';
+                resultMessage.textContent = `You stopped at ${gameState.currentNumber}`;
+                resultMessage.className = 'result-message failed';
+            }
+
+            showScreen('result');
+        }
+
+        // Reset Game
+        function resetGame() {
+            gameState.currentLevel = 1;
+            gameState.score = 0;
+            gameState.currentNumber = 0;
+            gameState.isRunning = false;
+            clearInterval(gameState.interval);
+            levelDisplay.textContent = '1';
+            scoreDisplay.textContent = '0';
+        }
+    </script>
+</body>
+</html>

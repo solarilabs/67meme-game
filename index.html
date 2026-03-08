@@ -4,56 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Find the 67</title>
+    <title>67 Games</title>
     <link rel="stylesheet" href="style.css">
+    <meta name="google-site-verification" content="BwdQn2W_l_F30_Wt1yacZ3sPHWIMf3JdNEv5xWiF-8c" />
 </head>
-<meta name="google-site-verification" content="BwdQn2W_l_F30_Wt1yacZ3sPHWIMf3JdNEv5xWiF-8c" />
 <body>
-    <!-- HOME SCREEN -->
-    <div id="homeScreen" class="screen active">
-        <div class="home-card">
-            <h1 class="home-title">Find the 67</h1>
-            <p class="home-subtitle">Find the number 67 before time runs out.</p>
-            <div id="startGameBtn" class="arcade-67">67</div>
-            <p class="start-hint">Press 67 to start</p>
+    <div class="homepage-container">
+        <h1 class="homepage-title">67 Games</h1>
+        <div class="game-cards">
+            <a href="find67.html" class="game-card">Find the 67</a>
+            <a href="reach67.html" class="game-card">Reach 67</a>
         </div>
     </div>
-
-    <!-- GAME SCREEN -->
-    <div id="gameScreen" class="screen">
-        <div class="timer-container">
-            <div class="timer-bar" id="timerBar"></div>
-        </div>
-        <div class="game-info">
-            <h2>Level <span id="levelDisplay">1</span></h2>
-            <p>Score: <span id="scoreDisplay">0</span></p>
-        </div>
-        <div class="game-content">
-            <div id="gridContainer" class="grid"></div>
-        </div>
-    </div>
-
-    <!-- GAME OVER SCREEN -->
-    <div id="gameOverScreen" class="screen">
-        <div class="game-over-card">
-            <h2 class="game-over-title">Game Over!</h2>
-            <div class="score-display">
-                <div class="score-item">
-                    <p class="score-label">Final Score</p>
-                    <p class="score-value" id="finalScore">0</p>
-                </div>
-                <div class="score-item">
-                    <p class="score-label">High Score</p>
-                    <p class="score-value" id="highScore">0</p>
-                </div>
-            </div>
-            <div class="button-group">
-                <button id="playAgainBtn" class="btn btn-primary">Play Again</button>
-                <button id="homeBtn" class="btn btn-secondary">Return to Home</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
 </body>
 </html>

@@ -23,12 +23,56 @@ body {
 }
 
 .homepage-title {
-    font-size: 4rem;
-    margin-bottom: 40px;
+    font-size: 5rem;
+    font-weight: 900;
+    margin-bottom: 20px;
     background: linear-gradient(135deg, #FFD700, #FF4500);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+.homepage-subtitle {
+    font-size: 1.3rem;
+    color: #222;
+    margin-bottom: 40px;
+    opacity: 0.85;
+}
+
+.game-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.game-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    padding: 30px 20px;
+    text-decoration: none;
+    color: #222;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    display: block;
+}
+
+.card-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.card-desc {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.homepage-footer {
+    margin-top: 60px;
+    font-size: 0.9rem;
+    color: #444;
+    opacity: 0.7;
 }
 
 .game-cards {
@@ -529,6 +573,7 @@ body {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
+    /* Reach/Find games adjustments */
     .home-card {
         padding: 40px 30px;
         max-width: 90vw;
@@ -539,7 +584,22 @@ body {
     }
 
     .home-subtitle {
-        font-size: 1rem;
+        font_size: 1rem;
+    }
+
+    /* Homepage adjustments */
+    .homepage-title {
+        font-size: 3.5rem;
+    }
+
+    .game-cards {
+        gap: 20px;
+        max-width: 100%;
+        padding: 0 20px;
+    }
+
+    .game-card {
+        padding: 30px 20px;
     }
 
     .game-over-card {

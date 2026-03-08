@@ -3,6 +3,10 @@
 
 <head>
 <title>67 Clicker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -14,7 +18,10 @@
 
 <h1>67 Clicker</h1>
 
-<div class="cart">🛒</div>
+<div id="shopButton" class="shopButton">
+🛒 Shop
+<span id="shopNotification" class="shopNotification">1</span>
+</div>
 
 </div>
 
@@ -33,21 +40,39 @@
 </div>
 
 
-<div class="shop">
+<div id="shopPanel" class="shopPanel">
 
+<div class="shopHeader">
 <h2>Shop</h2>
+<button id="closeShop" class="closeShop">×</button>
+</div>
 
-<button id="upgradeClick">
-Cursor (+1 click) - 50
-</button>
+<div class="upgradeItem">
+<div class="upgradeInfo">
+<div class="upgradeName">Cursor</div>
+<div class="upgradeEffect">+1 per click</div>
+</div>
+<div class="upgradeCost">Cost: 10</div>
+<button id="upgradeClick" class="upgradeBtn">Buy</button>
+</div>
 
-<button id="upgradeAuto">
-Auto 67 (+1/sec) - 100
-</button>
+<div class="upgradeItem">
+<div class="upgradeInfo">
+<div class="upgradeName">Auto 67</div>
+<div class="upgradeEffect">+1/sec</div>
+</div>
+<div class="upgradeCost">Cost: 50</div>
+<button id="upgradeAuto" class="upgradeBtn">Buy</button>
+</div>
 
-<button id="upgradeFactory">
-Factory (+5/sec) - 500
-</button>
+<div class="upgradeItem">
+<div class="upgradeInfo">
+<div class="upgradeName">Factory</div>
+<div class="upgradeEffect">+5/sec</div>
+</div>
+<div class="upgradeCost">Cost: 250</div>
+<button id="upgradeFactory" class="upgradeBtn">Buy</button>
+</div>
 
 </div>
 

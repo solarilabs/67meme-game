@@ -396,61 +396,95 @@ const upgradeAuto = document.getElementById("upgradeAuto")
 const upgradeFactory = document.getElementById("upgradeFactory")
 
 const floating = document.getElementById("floatingNumbers")
+const shopButton = document.getElementById("shopButton")
+const shopPanel = document.getElementById("shopPanel")
+const shopNotification = document.getElementById("shopNotification")
+const closeShop = document.getElementById("closeShop")
 
+let shopOpen = false
 
 function updateScore(){
 scoreDisplay.textContent = score
+updateShopNotification()
 }
 
+function updateShopNotification(){
+let availableUpgrades = 0
+if(score >= 10) availableUpgrades++
+if(score >= 50) availableUpgrades++
+if(score >= 250) availableUpgrades++
 
-clickButton.addEventListener("click", ()=>{
+if(availableUpgrades > 0 && !shopOpen){
+shopNotification.textContent = availableUpgrades
+shopNotification.style.display = 'flex'
+} else {
+shopNotification.style.display = 'none'
+}
+}
+
+function toggleShop(){
+shopOpen = !shopOpen
+if(shopOpen){
+shopPanel.classList.add('open')
+shopNotification.style.display = 'none'
+} else {
+shopPanel.classList.remove('open')
+}
+}
+
+shopButton.addEventListener('click', toggleShop)
+closeShop.addEventListener('click', toggleShop)
+
+clickButton.addEventListener("click", (e)=>{
 
 score += clickPower
 updateScore()
 
+// Improved click animation
 clickButton.classList.add("bounce")
+
+// Create floating number from click position
+const rect = clickButton.getBoundingClientRect()
+const clickX = e.clientX - rect.left
+const clickY = e.clientY - rect.top
+
+spawnNumber(clickX, clickY)
 
 setTimeout(()=>{
 clickButton.classList.remove("bounce")
 },150)
 
-spawnNumber()
-
 })
-
 
 upgradeClick.addEventListener("click",()=>{
 
-if(score >= 50){
-score -= 50
+if(score >= 10){
+score -= 10
 clickPower += 1
 updateScore()
 }
 
 })
 
-
 upgradeAuto.addEventListener("click",()=>{
 
-if(score >= 100){
-score -= 100
+if(score >= 50){
+score -= 50
 autoPower += 1
 updateScore()
 }
 
 })
 
-
 upgradeFactory.addEventListener("click",()=>{
 
-if(score >= 500){
-score -= 500
+if(score >= 250){
+score -= 250
 autoPower += 5
 updateScore()
 }
 
 })
-
 
 setInterval(()=>{
 
@@ -459,8 +493,7 @@ updateScore()
 
 },1000)
 
-
-function spawnNumber(){
+function spawnNumber(x, y){
 
 const el = document.createElement("div")
 
@@ -468,7 +501,8 @@ el.className = "floating"
 
 el.textContent = "+67"
 
-el.style.left = (window.innerWidth/2 + Math.random()*100 - 50) + "px"
+el.style.left = (x + window.innerWidth/2 - 150) + "px"
+el.style.top = (y + 100) + "px"
 
 floating.appendChild(el)
 

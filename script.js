@@ -1,9 +1,13 @@
 // Shared initialization entrypoint
-if (document.getElementById('gridContainer')) {
-    initFind67();
-} else if (document.getElementById('numberDisplay')) {
-    initReach67();
-}
+window.addEventListener("DOMContentLoaded", () => {
+    if (document.getElementById("gridContainer")) {
+        initFind67();
+    }
+
+    if (document.getElementById("numberDisplay")) {
+        initReach67();
+    }
+});
 
 // --------- Find the 67 Game Implementation ---------
 function initFind67() {

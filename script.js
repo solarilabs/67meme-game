@@ -29,6 +29,9 @@ function initFind67() {
     const startGameBtn = document.getElementById('startGameBtn');
     const playAgainBtn = document.getElementById('playAgainBtn');
     const homeBtn = document.getElementById('homeBtn');
+    const homeBtnGameOver = document.getElementById('homeBtnGameOver');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const restartBtn = document.getElementById('restartBtn');
 
     const gridContainer = document.getElementById('gridContainer');
     const levelDisplay = document.getElementById('levelDisplay');
@@ -44,9 +47,16 @@ function initFind67() {
         startGame();
     });
     homeBtn.addEventListener('click', () => {
-        resetGame();
-        showScreen('home');
+        window.location.href = 'index.html';
     });
+    if (homeBtnGameOver) {
+        homeBtnGameOver.addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+    }
+    pauseBtn.addEventListener('click', togglePause);
+    restartBtn.addEventListener('click', restartLevel);
+
 
     // Screen Management
     function showScreen(screenName) {
@@ -150,9 +160,11 @@ function initFind67() {
     }
 
     // Start Timer
-    function startTimer() {
-        gameState.timeRemaining = gameState.maxTime;
-        updateTimerBar();
+    function startTimer(reset = true) {
+        if (reset) {
+            gameState.timeRemaining = gameState.maxTime;
+            updateTimerBar();
+        }
 
         // Set smooth transition matching the update interval
         timerBar.style.transition = 'width 0.016s linear';
@@ -170,10 +182,33 @@ function initFind67() {
         }, 16); // ~60fps
     }
 
+
     // Update Timer Bar
     function updateTimerBar() {
         const percentage = (gameState.timeRemaining / gameState.maxTime) * 100;
         timerBar.style.width = percentage + '%';
+    }
+
+    // Pause / Restart helpers
+    function togglePause() {
+        if (gameState.isGameRunning) {
+            clearInterval(gameState.timerInterval);
+            gameState.isGameRunning = false;
+            pauseBtn.textContent = '▶';
+        } else {
+            gameState.isGameRunning = true;
+            pauseBtn.textContent = '⏸';
+            startTimer(false);
+        }
+    }
+
+    function restartLevel() {
+        clearInterval(gameState.timerInterval);
+        gameState.isGameRunning = false;
+        gameState.timeRemaining = gameState.maxTime;
+        gameState.isGameRunning = true;
+        generateGrid();
+        startTimer(true);
     }
 
     // End Game
@@ -234,6 +269,9 @@ function initReach67() {
     const stopBtn = document.getElementById('stopBtn');
     const playAgainBtn = document.getElementById('playAgainBtn');
     const homeBtn = document.getElementById('homeBtn');
+    const homeBtnGameOver = document.getElementById('homeBtnGameOver');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const restartBtn = document.getElementById('restartBtn');
 
     const levelDisplay = document.getElementById('levelDisplay');
     const scoreDisplay = document.getElementById('scoreDisplay');
@@ -248,9 +286,16 @@ function initReach67() {
         startGame();
     });
     homeBtn.addEventListener('click', () => {
-        resetGame();
-        showScreen('home');
+        window.location.href = 'index.html';
     });
+    if (homeBtnGameOver) {
+        homeBtnGameOver.addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+    }
+    pauseBtn.addEventListener('click', togglePause);
+    restartBtn.addEventListener('click', restartLevel);
+
 
     function showScreen(name) {
         homeScreen.classList.remove('active');
@@ -261,11 +306,13 @@ function initReach67() {
         if (name === 'result') resultScreen.classList.add('active');
     }
 
-    function startGame() {
+    function startGame(reset = true) {
         showScreen('game');
         state.isRunning = true;
-        state.currentNumber = 0;
-        numberDisplay.textContent = '0';
+        if (reset) {
+            state.currentNumber = 0;
+            numberDisplay.textContent = '0';
+        }
         const speed = Math.max(50, state.baseSpeed - (state.currentLevel - 1) * state.speedDecrease);
         state.interval = setInterval(() => {
             state.currentNumber++;
@@ -305,30 +352,29 @@ function initReach67() {
         levelDisplay.textContent = '1';
         scoreDisplay.textContent = '0';
     }
-}
 
+    function togglePause() {
+        if (state.isRunning) {
+            clearInterval(state.interval);
+            state.isRunning = false;
+            pauseBtn.textContent = '▶';
+        } else {
+            state.isRunning = true;
+            pauseBtn.textContent = '⏸';
+            startGame(false); // resume without resetting the number
+        }
+    }
 
-// Screen Management
-function showScreen(screenName) {
-    homeScreen.classList.remove('active');
-    gameScreen.classList.remove('active');
-    gameOverScreen.classList.remove('active');
-
-    if (screenName === 'home') {
-        homeScreen.classList.add('active');
-    } else if (screenName === 'game') {
-        gameScreen.classList.add('active');
-    } else if (screenName === 'gameOver') {
-        gameOverScreen.classList.add('active');
+    function restartLevel() {
+        clearInterval(state.interval);
+        state.isRunning = false;
+        state.currentNumber = 0;
+        state.isRunning = true;
+        numberDisplay.textContent = '0';
+        startGame();
     }
 }
 
-// Start Game
-function startGame() {
-    showScreen('game');
-    gameState.isGameRunning = true;
-    generateGrid();
-    startTimer();
 }
 
 // Generate Grid

@@ -20,12 +20,20 @@
 
     <!-- GAME SCREEN -->
     <div id="gameScreen" class="screen">
+        <!-- toolbar with level/score and controls -->
+        <div id="toolbar" class="toolbar">
+            <div class="toolbar-info">
+                <div>Level <span id="levelDisplay">1</span></div>
+                <div>Score: <span id="scoreDisplay">0</span></div>
+            </div>
+            <div class="toolbar-controls">
+                <button id="homeBtn" class="icon-btn" title="Home">🏠</button>
+                <button id="pauseBtn" class="icon-btn" title="Pause">⏸</button>
+                <button id="restartBtn" class="icon-btn" title="Restart">🔄</button>
+            </div>
+        </div>
         <div class="timer-container">
             <div class="timer-bar" id="timerBar"></div>
-        </div>
-        <div class="game-info">
-            <h2>Level <span id="levelDisplay">1</span></h2>
-            <p>Score: <span id="scoreDisplay">0</span></p>
         </div>
         <div class="game-content">
             <div id="gridContainer" class="grid"></div>
@@ -48,7 +56,7 @@
             </div>
             <div class="button-group">
                 <button id="playAgainBtn" class="btn btn-primary">Play Again</button>
-                <button id="homeBtn" class="btn btn-secondary">Return to Home</button>
+                <button id="homeBtnGameOver" class="btn btn-secondary">Return to Home</button>
             </div>
         </div>
     </div>

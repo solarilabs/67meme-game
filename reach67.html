@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
     
 </head>
-<body>
+<body class="reach">
     <!-- HOME SCREEN -->
     <div id="homeScreen" class="screen active">
         <div class="home-card">
@@ -20,6 +20,17 @@
 
     <!-- GAME SCREEN -->
     <div id="gameScreen" class="screen">
+        <div id="toolbar" class="toolbar">
+            <div class="toolbar-info">
+                <div>Level: <span id="levelDisplay">1</span></div>
+                <div>Score: <span id="scoreDisplay">0</span></div>
+            </div>
+            <div class="toolbar-controls">
+                <button id="homeBtn" class="icon-btn" title="Home">🏠</button>
+                <button id="pauseBtn" class="icon-btn" title="Pause">⏸</button>
+                <button id="restartBtn" class="icon-btn" title="Restart">🔄</button>
+            </div>
+        </div>
         <div class="game-content">
             <div class="game-info">
                 <div>Level: <span id="levelDisplay">1</span></div>
@@ -37,7 +48,7 @@
             <p id="resultMessage" class="result-message">Message</p>
             <div style="display: flex; gap: 15px; justify-content: center;">
                 <button id="playAgainBtn" class="btn btn-primary">Play Again</button>
-                <button id="homeBtn" class="btn btn-secondary">Home</button>
+                <button id="homeBtnGameOver" class="btn btn-secondary">Home</button>
             </div>
         </div>
     </div>

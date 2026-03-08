@@ -17,26 +17,53 @@ body {
 }
 
 /* HOMEPAGE STYLES */
+/* animated gradient background */
+.homepage {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(45deg, orange, hotpink, purple);
+    background-size: 600% 600%;
+    animation: gradientShift 20s ease infinite;
+    color: #fff;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 .homepage-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    color: #333;
+    min-height: 100vh;
+    padding: 40px 20px;
 }
 
 .homepage-title {
-    font-size: 5rem;
+    font-size: clamp(3.5rem, 8vw, 8rem);
     font-weight: 900;
-    margin-bottom: 20px;
-    background: linear-gradient(135deg, #FFD700, #FF4500);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    margin: 0 0 20px;
+    background: linear-gradient(90deg, #FFD700, #FFFFFF, #FFD700);
     background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from { text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+    to { text-shadow: 0 0 25px rgba(255,255,255,1); }
 }
 
 .homepage-subtitle {
-    font-size: 1.3rem;
-    color: #222;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
     margin-bottom: 40px;
-    opacity: 0.85;
+    color: rgba(255,255,255,0.85);
 }
 
 .game-cards {
@@ -44,60 +71,42 @@ body {
     flex-direction: column;
     gap: 30px;
     max-width: 600px;
+    width: 100%;
     margin: 0 auto;
 }
 
 .game-card {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 25px;
-    padding: 30px 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px 30px;
     text-decoration: none;
-    color: #222;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
     display: block;
+    cursor: pointer;
+}
+
+.game-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .card-title {
-    font-size: 2rem;
-    margin-bottom: 10px;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
 }
 
 .card-desc {
     font-size: 1rem;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 .homepage-footer {
-    margin-top: 60px;
+    margin-top: auto;
     font-size: 0.9rem;
-    color: #444;
-    opacity: 0.7;
-}
-
-.game-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.game-card {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 20px;
-    padding: 40px 20px;
-    font-size: 2rem;
-    font-weight: bold;
-    text-decoration: none;
-    color: #333;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.game-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.3);
+    color: rgba(255,255,255,0.7);
 }
 
 
@@ -111,6 +120,64 @@ body {
     100% {
         background-position: 0% 50%;
     }
+}
+
+/* Toolbar for both games */
+.toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 500;
+}
+
+.toolbar-info {
+    display: flex;
+    gap: 20px;
+    color: white;
+    font-size: 1rem;
+}
+
+.toolbar-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.icon-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+.icon-btn:active {
+    transform: scale(0.95);
+}
+
+/* push page content down to avoid toolbar overlap */
+#gameScreen .timer-container,
+#gameScreen .game-content {
+    margin-top: 50px;
 }
 
 .screen {
@@ -505,14 +572,14 @@ body {
 
 /* Reach 67 specific styles */
 .number-display {
-    font-size: 8rem;
+    font-size: 7.5rem; /* ~120px base */
     font-weight: 900;
     color: white;
     text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
     background: rgba(0, 0, 0, 0.2);
     border-radius: 20px;
-    padding: 40px 60px;
-    min-width: 300px;
+    padding: 20px 40px;
+    min-width: auto;
     text-align: center;
     border: 4px solid rgba(255, 255, 255, 0.3);
 }
@@ -530,6 +597,7 @@ body {
     transition: all 0.2s ease;
     text-transform: uppercase;
     letter-spacing: 2px;
+    margin-top: 20px; /* ensure separation from number */
 }
 
 .stop-btn:hover {
@@ -539,6 +607,28 @@ body {
 
 .stop-btn:active {
     transform: scale(0.95);
+}
+
+/* Reach 67 layout overrides */
+body.reach #gameScreen .game-content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 40px;
+    margin-top: 0; /* ignore toolbar push so we can center vertically */
+}
+
+body.reach .number-display {
+    font-size: clamp(5rem, 20vw, 9rem);
+    padding: 20px 40px;
+}
+
+body.reach .game-info {
+    display: none;
+}
+
+body.reach .stop-btn {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
 }
 
 .result-card {
@@ -587,9 +677,9 @@ body {
         font_size: 1rem;
     }
 
-    /* Homepage adjustments */
+    /* Homepage responsive tweaks */
     .homepage-title {
-        font-size: 3.5rem;
+        font-size: clamp(3rem, 10vw, 6rem);
     }
 
     .game-cards {

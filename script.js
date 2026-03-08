@@ -7,6 +7,10 @@ window.addEventListener("DOMContentLoaded", () => {
     if (document.getElementById("numberDisplay")) {
         initReach67();
     }
+
+    if(document.getElementById("clickButton")){
+        initClicker67()
+    }
 });
 
 // --------- Find the 67 Game Implementation ---------
@@ -377,4 +381,104 @@ function initReach67() {
     }
 }
 
+// --------- Clicker 67 Game Implementation ---------
+function initClicker67(){
+
+let score = 0
+let clickPower = 1
+let autoPower = 0
+
+const scoreDisplay = document.getElementById("score")
+const clickButton = document.getElementById("clickButton")
+
+const upgradeClick = document.getElementById("upgradeClick")
+const upgradeAuto = document.getElementById("upgradeAuto")
+const upgradeFactory = document.getElementById("upgradeFactory")
+
+const floating = document.getElementById("floatingNumbers")
+
+
+function updateScore(){
+scoreDisplay.textContent = score
+}
+
+
+clickButton.addEventListener("click", ()=>{
+
+score += clickPower
+updateScore()
+
+clickButton.classList.add("bounce")
+
+setTimeout(()=>{
+clickButton.classList.remove("bounce")
+},150)
+
+spawnNumber()
+
+})
+
+
+upgradeClick.addEventListener("click",()=>{
+
+if(score >= 50){
+score -= 50
+clickPower += 1
+updateScore()
+}
+
+})
+
+
+upgradeAuto.addEventListener("click",()=>{
+
+if(score >= 100){
+score -= 100
+autoPower += 1
+updateScore()
+}
+
+})
+
+
+upgradeFactory.addEventListener("click",()=>{
+
+if(score >= 500){
+score -= 500
+autoPower += 5
+updateScore()
+}
+
+})
+
+
+setInterval(()=>{
+
+score += autoPower
+updateScore()
+
+},1000)
+
+
+function spawnNumber(){
+
+const el = document.createElement("div")
+
+el.className = "floating"
+
+el.textContent = "+67"
+
+el.style.left = (window.innerWidth/2 + Math.random()*100 - 50) + "px"
+
+floating.appendChild(el)
+
+setTimeout(()=>{
+el.remove()
+},1000)
+
+}
+
+updateScore()
+
+}
 

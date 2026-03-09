@@ -852,43 +852,82 @@ body.reach .stop-btn {
 }
 
 .score {
-    font-size: 2.2rem;
-    color: white;
-    font-weight: 600;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    background: rgba(0, 0, 0, 0.3);
-    padding: 20px 40px;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* legacy, replaced by .score-hud */
+}
+
+.score-hud {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 12px;
+}
+.score-bar {
+    font-size: 2.4rem;
+    color: #fff;
+    font-weight: 700;
+    text-shadow: 0 2px 8px #000a;
+    background: rgba(0,0,0,0.35);
+    padding: 24px 56px;
+    border-radius: 24px;
+    margin-bottom: 8px;
+    width: 100%;
+    max-width: 340px;
+    box-shadow: 0 8px 32px #0003, 0 0 0 4px #ffd70033 inset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 1px;
+}
+.auto-bar {
+    font-size: 1.2rem;
+    color: #ffd700;
+    font-weight: 500;
+    background: rgba(0,0,0,0.18);
+    padding: 8px 32px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 220px;
+    margin-bottom: 4px;
+    box-shadow: 0 2px 8px #0002;
+    text-align: center;
+}
+.tile-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 16px;
 }
 
 .click67 {
-    width: 280px;
-    height: 280px;
+    width: 220px;
+    height: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 32px auto 0 auto;
-    font-size: 80px;
+    margin: 0 auto;
+    font-size: 6.5rem;
     font-weight: 900;
     color: #fff;
     background: linear-gradient(145deg, #ffe066 0%, #ffd84a 60%, #ffef9a 100%);
-    border-radius: 24px;
+    border-radius: 32px;
     box-shadow:
-        0 12px 40px 0 #ffd84a88,
+        0 8px 32px 0 #ffd84a88,
         0 2px 8px 0 #232a4d33,
-        0 0 0 12px #fff6b033 inset;
+        0 0 0 16px #fff6b033 inset,
+        0 0 32px 0 #ffd70066;
     cursor: pointer;
     user-select: none;
     position: relative;
-    transition: transform 0.15s cubic-bezier(.5,1.5,.5,1), box-shadow 0.15s;
+    transition: transform 0.18s cubic-bezier(.5,1.5,.5,1), box-shadow 0.18s;
     outline: none;
     border: none;
     touch-action: manipulation;
     appearance: none;
     overflow: hidden;
-}
+    background-clip: padding-box;
 }
 
 .click67::before {
@@ -1082,18 +1121,22 @@ body.reach .stop-btn {
 
 .floating {
     position: absolute;
-    font-size: 24px;
+    font-size: 2rem;
     animation: floatUp 1s forwards;
     font-weight: 700;
     color: #ffd700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 8px #000a, 0 0 12px #ffd70099;
     pointer-events: none;
     z-index: 100;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.95;
 }
 
 @keyframes floatUp {
     0% { opacity: 1; transform: translateY(0) scale(1); }
-    100% { opacity: 0; transform: translateY(-120px) scale(1.2); }
+    100% { opacity: 0; transform: translateY(-80px) scale(1.18); }
 }
 
 /* Mobile optimizations */
@@ -1101,34 +1144,44 @@ body.reach .stop-btn {
     .clicker-page {
         padding: 10px;
     }
-
     .game-area {
-        gap: 30px;
+        gap: 24px;
         margin-top: 70px;
+        max-width: 98vw;
     }
-
-    .score {
-        font-size: 1.8rem;
-        padding: 15px 30px;
+    .score-hud {
+        width: 100%;
+        max-width: 98vw;
     }
-
+    .score-bar {
+        font-size: 1.5rem;
+        padding: 16px 18px;
+        border-radius: 16px;
+        max-width: 98vw;
+    }
+    .auto-bar {
+        font-size: 1rem;
+        padding: 6px 12px;
+        border-radius: 12px;
+        max-width: 98vw;
+    }
+    .tile-center {
+        margin-top: 8px;
+    }
     .click67 {
-        width: 220px;
-        height: 220px;
-        font-size: 60px;
-        border-radius: 20px;
+        width: 140px;
+        height: 140px;
+        font-size: 2.8rem;
+        border-radius: 16px;
     }
-
     .shopPanel {
         width: calc(100vw - 40px);
         right: -100vw;
         top: 70px;
     }
-
     .shopPanel.open {
         right: 20px;
     }
-
     .shopButton {
         padding: 8px 16px;
         font-size: 0.9rem;

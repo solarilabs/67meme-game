@@ -384,135 +384,124 @@ function initReach67() {
 // --------- Clicker 67 Game Implementation ---------
 function initClicker67(){
 
-let score = 0
-let clickPower = 1
-let autoPower = 0
+let score = 0;
+let clickPower = 1;
+let autoPower = 0;
 
-const scoreDisplay = document.getElementById("score")
-const clickButton = document.getElementById("clickButton")
+const scoreDisplay = document.getElementById("score");
+const autoPowerDisplay = document.getElementById("autoPowerDisplay");
+const clickButton = document.getElementById("clickButton");
 
-const upgradeClick = document.getElementById("upgradeClick")
-const upgradeAuto = document.getElementById("upgradeAuto")
-const upgradeFactory = document.getElementById("upgradeFactory")
+const upgradeClick = document.getElementById("upgradeClick");
+const upgradeAuto = document.getElementById("upgradeAuto");
+const upgradeFactory = document.getElementById("upgradeFactory");
 
-const floating = document.getElementById("floatingNumbers")
-const shopButton = document.getElementById("shopButton")
-const shopPanel = document.getElementById("shopPanel")
-const shopNotification = document.getElementById("shopNotification")
-const closeShop = document.getElementById("closeShop")
+const floating = document.getElementById("floatingNumbers");
+const shopButton = document.getElementById("shopButton");
+const shopPanel = document.getElementById("shopPanel");
+const shopNotification = document.getElementById("shopNotification");
+const closeShop = document.getElementById("closeShop");
 
-let shopOpen = false
+let shopOpen = false;
 
-function updateScore(){
-scoreDisplay.textContent = score
-updateShopNotification()
+function updateScore() {
+    scoreDisplay.textContent = score;
+    updateShopNotification();
 }
 
-function updateShopNotification(){
-let availableUpgrades = 0
-if(score >= 10) availableUpgrades++
-if(score >= 50) availableUpgrades++
-if(score >= 250) availableUpgrades++
-
-if(availableUpgrades > 0 && !shopOpen){
-shopNotification.textContent = availableUpgrades
-shopNotification.style.display = 'flex'
-} else {
-shopNotification.style.display = 'none'
-}
+function updateAutoPower() {
+    autoPowerDisplay.textContent = autoPower;
 }
 
-function toggleShop(){
-shopOpen = !shopOpen
-if(shopOpen){
-shopPanel.classList.add('open')
-shopNotification.style.display = 'none'
-} else {
-shopPanel.classList.remove('open')
-}
-}
+function updateShopNotification() {
+    let availableUpgrades = 0;
+    if (score >= 10) availableUpgrades++;
+    if (score >= 50) availableUpgrades++;
+    if (score >= 250) availableUpgrades++;
 
-shopButton.addEventListener('click', toggleShop)
-closeShop.addEventListener('click', toggleShop)
-
-clickButton.addEventListener("click", (e)=>{
-
-score += clickPower
-updateScore()
-
-// Improved click animation
-clickButton.classList.add("bounce")
-
-// Create floating number from click position
-const rect = clickButton.getBoundingClientRect()
-const clickX = e.clientX - rect.left
-const clickY = e.clientY - rect.top
-
-spawnNumber(clickX, clickY)
-
-setTimeout(()=>{
-clickButton.classList.remove("bounce")
-},150)
-
-})
-
-upgradeClick.addEventListener("click",()=>{
-
-if(score >= 10){
-score -= 10
-clickPower += 1
-updateScore()
+    if (availableUpgrades > 0 && !shopOpen) {
+        shopNotification.textContent = availableUpgrades;
+        shopNotification.style.display = 'flex';
+    } else {
+        shopNotification.style.display = 'none';
+    }
 }
 
-})
-
-upgradeAuto.addEventListener("click",()=>{
-
-if(score >= 50){
-score -= 50
-autoPower += 1
-updateScore()
+function toggleShop() {
+    shopOpen = !shopOpen;
+    if (shopOpen) {
+        shopPanel.classList.add('open');
+        shopNotification.style.display = 'none';
+    } else {
+        shopPanel.classList.remove('open');
+    }
 }
 
-})
+shopButton.addEventListener('click', toggleShop);
+closeShop.addEventListener('click', toggleShop);
 
-upgradeFactory.addEventListener("click",()=>{
+clickButton.addEventListener("click", (e) => {
+    score += clickPower;
+    updateScore();
 
-if(score >= 250){
-score -= 250
-autoPower += 5
-updateScore()
+    clickButton.classList.add("bounce");
+
+    // Floating number feedback
+    const rect = clickButton.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const clickY = e.clientY - rect.top;
+    spawnNumber(clickX, clickY, clickPower);
+
+    setTimeout(() => {
+        clickButton.classList.remove("bounce");
+    }, 150);
+});
+
+upgradeClick.addEventListener("click", () => {
+    if (score >= 10) {
+        score -= 10;
+        clickPower += 1;
+        updateScore();
+    }
+});
+
+upgradeAuto.addEventListener("click", () => {
+    if (score >= 50) {
+        score -= 50;
+        autoPower += 1;
+        updateScore();
+        updateAutoPower();
+    }
+});
+
+upgradeFactory.addEventListener("click", () => {
+    if (score >= 250) {
+        score -= 250;
+        autoPower += 5;
+        updateScore();
+        updateAutoPower();
+    }
+});
+
+setInterval(() => {
+    score += autoPower;
+    updateScore();
+}, 1000);
+
+function spawnNumber(x, y, power) {
+    const el = document.createElement("div");
+    el.className = "floating";
+    el.textContent = "+" + power;
+    // Centered relative to tile
+    el.style.left = (x + clickButton.offsetLeft - 40) + "px";
+    el.style.top = (y + clickButton.offsetTop + 40) + "px";
+    floating.appendChild(el);
+    setTimeout(() => {
+        el.remove();
+    }, 1000);
 }
 
-})
-
-setInterval(()=>{
-
-score += autoPower
-updateScore()
-
-},1000)
-
-function spawnNumber(x, y){
-
-const el = document.createElement("div")
-
-el.className = "floating"
-
-el.textContent = "+67"
-
-el.style.left = (x + window.innerWidth/2 - 150) + "px"
-el.style.top = (y + 100) + "px"
-
-floating.appendChild(el)
-
-setTimeout(()=>{
-el.remove()
-},1000)
-
-}
-
-updateScore()
-
+updateScore();
+updateAutoPower();
 }
 

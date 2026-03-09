@@ -383,6 +383,13 @@ function initReach67() {
 
 // --------- Clicker 67 Game Implementation ---------
 function initClicker67(){
+// Number formatting
+function formatNumber(value) {
+    if (value >= 1e9) return (value / 1e9).toFixed(value % 1e9 === 0 ? 0 : 2).replace(/\.00$/,'') + 'B';
+    if (value >= 1e6) return (value / 1e6).toFixed(value % 1e6 === 0 ? 0 : 2).replace(/\.00$/,'') + 'M';
+    if (value >= 1e3) return (value / 1e3).toFixed(value % 1e3 === 0 ? 0 : 2).replace(/\.00$/,'') + 'K';
+    return value.toString();
+}
 // Achievement system
 const achievementPopup = document.getElementById("achievementPopup");
 const achievementsBtn = document.getElementById("achievementsBtn");
@@ -392,12 +399,12 @@ const achievementList = document.getElementById("achievementList");
 
 const achievementMilestones = [67, 670, 6700, 67000, 670000, 6700000];
 const achievementNames = [
-    "First 67",
-    "67 x 10",
-    "67 x 100",
-    "67 x 1000",
-    "67 x 10000",
-    "67 x 100000"
+    "Reached 67",
+    "Reached 670",
+    "Reached 6.7K",
+    "Reached 67K",
+    "Reached 670K",
+    "Reached 6.7M"
 ];
 let unlockedAchievements = [];
 
@@ -421,8 +428,8 @@ function showAchievementPopup(name) {
         achievementPopup.classList.add("fadeout");
         setTimeout(() => {
             achievementPopup.style.display = "none";
-        }, 1200);
-    }, 1800);
+        }, 2000);
+    }, 2000);
 }
 
 function updateAchievementPanel() {
@@ -478,7 +485,7 @@ const closeShop = document.getElementById("closeShop");
 let shopOpen = false;
 
 function updateScore() {
-    scoreDisplay.textContent = score;
+    scoreDisplay.textContent = formatNumber(score);
     updateShopNotification();
     checkAchievements();
     updateClickPowerIndicator();
@@ -488,7 +495,19 @@ function updateAutoPower() {
     function updateClickPowerIndicator() {
         clickPowerDisplay.textContent = "+" + clickPower;
     }
-    autoPowerDisplay.textContent = autoPower;
+    autoPowerDisplay.textContent = formatNumber(autoPower);
+    // Set upgrade costs formatted
+    document.getElementById("costClick").textContent = formatNumber(10);
+    document.getElementById("costAuto").textContent = formatNumber(50);
+    document.getElementById("costFactory").textContent = formatNumber(250);
+    document.getElementById("costMine").textContent = formatNumber(6500);
+    document.getElementById("costSilverCursor").textContent = formatNumber(150000);
+    document.getElementById("costFactory2").textContent = formatNumber(2000000);
+    document.getElementById("costLab").textContent = formatNumber(20000000);
+    document.getElementById("costTemple").textContent = formatNumber(125000000);
+    document.getElementById("costGoldCursor").textContent = formatNumber(400000000);
+    document.getElementById("costRocket").textContent = formatNumber(5000000000);
+    document.getElementById("costMan").textContent = formatNumber(100000000000);
 }
 
 function updateShopNotification() {

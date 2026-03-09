@@ -14,12 +14,15 @@
 
 
 <div class="topbar">
+</div>
 	<button onclick="window.location.href='index.html'">🏠</button>
 	<h1>67 Clicker</h1>
-	<div id="shopButton" class="shopButton">🛒 Shop
-		<span id="shopNotification" class="shopNotification">1</span>
+	<div style="display:flex;gap:8px;align-items:center;">
+		<div id="shopButton" class="shopButton">🛒 Shop
+			<span id="shopNotification" class="shopNotification">1</span>
+		</div>
+		<button id="achievementsBtn" class="shopButton" style="background:linear-gradient(135deg,#00c853,#b2ff59);color:#222;">🏆 Achievements</button>
 	</div>
-	<button id="achievementsBtn" class="shopButton" style="margin-left:8px;background:linear-gradient(135deg,#00c853,#b2ff59);color:#222;">🏆 Achievements</button>
 </div>
 
 
@@ -47,109 +50,142 @@
 <div id="shopPanel" class="shopPanel">
 
 
+
 <div class="shopHeader">
 <h2>Shop</h2>
 <button id="closeShop" class="closeShop">×</button>
 </div>
 
 <div class="upgradeItem">
-<div class="upgradeInfo">
-<div class="upgradeName">Cursor</div>
-<div class="upgradeEffect">+1 per click</div>
-</div>
-<div class="upgradeCost">Cost: 10</div>
-<button id="upgradeClick" class="upgradeBtn">Buy</button>
-</div>
-
-<div class="upgradeItem">
-<div class="upgradeInfo">
-<div class="upgradeName">Auto 67</div>
-<div class="upgradeEffect">+1/sec</div>
-</div>
-<div class="upgradeCost">Cost: 50</div>
-<button id="upgradeAuto" class="upgradeBtn">Buy</button>
+	<div class="upgradeCard">
+		<div class="upgradeIcon"><span>🖱️</span></div>
+		<div class="upgradeInfo">
+			<div class="upgradeName">Cursor</div>
+			<div class="upgradeEffect">Increase click power by +1</div>
+		</div>
+		<div class="upgradeCost">Cost: <span id="costClick">10</span></div>
+		<button id="upgradeClick" class="upgradeBtn">Buy</button>
+	</div>
 </div>
 
 <div class="upgradeItem">
-<div class="upgradeInfo">
-<div class="upgradeName">Factory</div>
-<div class="upgradeEffect">+5/sec</div>
-</div>
-<div class="upgradeCost">Cost: 250</div>
-<button id="upgradeFactory" class="upgradeBtn">Buy</button>
-</div>
-
-<!-- New Upgrades -->
-<div class="upgradeItem">
-<div class="upgradeInfo">
-<div class="upgradeName">67 Mine</div>
-<div class="upgradeEffect">+100/sec</div>
-</div>
-<div class="upgradeCost">Cost: 6500</div>
-<button id="upgradeMine" class="upgradeBtn">Buy</button>
+	<div class="upgradeCard">
+		<div class="upgradeIcon"><span>🔢</span></div>
+		<div class="upgradeInfo">
+			<div class="upgradeName">Auto 67</div>
+			<div class="upgradeEffect">Increase passive income by +1/sec</div>
+		</div>
+		<div class="upgradeCost">Cost: <span id="costAuto">50</span></div>
+		<button id="upgradeAuto" class="upgradeBtn">Buy</button>
+	</div>
 </div>
 
 <div class="upgradeItem">
-<div class="upgradeInfo">
-<div class="upgradeName">Silver Cursor</div>
-<div class="upgradeEffect">+2000 per click</div>
-</div>
-<div class="upgradeCost">Cost: 150000</div>
-<button id="upgradeSilverCursor" class="upgradeBtn">Buy</button>
-</div>
-
-<div class="upgradeItem">
-<div class="upgradeInfo">
-<div class="upgradeName">67 Factory</div>
-<div class="upgradeEffect">+15000/sec</div>
-</div>
-<div class="upgradeCost">Cost: 2000000</div>
-<button id="upgradeFactory2" class="upgradeBtn">Buy</button>
+	<div class="upgradeCard">
+		<div class="upgradeIcon"><span>🏭</span></div>
+		<div class="upgradeInfo">
+			<div class="upgradeName">Factory</div>
+			<div class="upgradeEffect">Increase passive income by +5/sec</div>
+		</div>
+		<div class="upgradeCost">Cost: <span id="costFactory">250</span></div>
+		<button id="upgradeFactory" class="upgradeBtn">Buy</button>
+	</div>
 </div>
 
 <div class="upgradeItem">
-<div class="upgradeInfo">
-<div class="upgradeName">67 Lab</div>
-<div class="upgradeEffect">+250000/sec</div>
-</div>
-<div class="upgradeCost">Cost: 20000000</div>
-<button id="upgradeLab" class="upgradeBtn">Buy</button>
-</div>
-
-<div class="upgradeItem">
-<div class="upgradeInfo">
-<div class="upgradeName">67 Temple</div>
-<div class="upgradeEffect">+5000000/sec</div>
-</div>
-<div class="upgradeCost">Cost: 125000000</div>
-<button id="upgradeTemple" class="upgradeBtn">Buy</button>
+	<div class="upgradeCard">
+		<div class="upgradeIcon"><span>⛏️</span></div>
+		<div class="upgradeInfo">
+			<div class="upgradeName">67 Mine</div>
+			<div class="upgradeEffect">Increase passive income by +100/sec</div>
+		</div>
+		<div class="upgradeCost">Cost: <span id="costMine">6500</span></div>
+		<button id="upgradeMine" class="upgradeBtn">Buy</button>
+	</div>
 </div>
 
 <div class="upgradeItem">
-<div class="upgradeInfo">
-<div class="upgradeName">Gold Cursor</div>
-<div class="upgradeEffect">+2000000 per click</div>
-</div>
-<div class="upgradeCost">Cost: 400000000</div>
-<button id="upgradeGoldCursor" class="upgradeBtn">Buy</button>
-</div>
-
-<div class="upgradeItem">
-<div class="upgradeInfo">
-<div class="upgradeName">67 Rocket</div>
-<div class="upgradeEffect">+100000000/sec</div>
-</div>
-<div class="upgradeCost">Cost: 5000000000</div>
-<button id="upgradeRocket" class="upgradeBtn">Buy</button>
+	<div class="upgradeCard">
+		<div class="upgradeIcon"><span>🖱️</span></div>
+		<div class="upgradeInfo">
+			<div class="upgradeName">Silver Cursor</div>
+			<div class="upgradeEffect">Increase click power by +2000</div>
+		</div>
+		<div class="upgradeCost">Cost: <span id="costSilverCursor">150000</span></div>
+		<button id="upgradeSilverCursor" class="upgradeBtn">Buy</button>
+	</div>
 </div>
 
 <div class="upgradeItem">
-<div class="upgradeInfo">
-<div class="upgradeName">67 Man</div>
-<div class="upgradeEffect">+5000000000/sec</div>
+	<div class="upgradeCard">
+		<div class="upgradeIcon"><span>🏭</span></div>
+		<div class="upgradeInfo">
+			<div class="upgradeName">67 Factory</div>
+			<div class="upgradeEffect">Increase passive income by +15000/sec</div>
+		</div>
+		<div class="upgradeCost">Cost: <span id="costFactory2">2000000</span></div>
+		<button id="upgradeFactory2" class="upgradeBtn">Buy</button>
+	</div>
 </div>
-<div class="upgradeCost">Cost: 100000000000</div>
-<button id="upgradeMan" class="upgradeBtn">Buy</button>
+
+<div class="upgradeItem">
+	<div class="upgradeCard">
+		<div class="upgradeIcon"><span>🧪</span></div>
+		<div class="upgradeInfo">
+			<div class="upgradeName">67 Lab</div>
+			<div class="upgradeEffect">Increase passive income by +250000/sec</div>
+		</div>
+		<div class="upgradeCost">Cost: <span id="costLab">20000000</span></div>
+		<button id="upgradeLab" class="upgradeBtn">Buy</button>
+	</div>
+</div>
+
+<div class="upgradeItem">
+	<div class="upgradeCard">
+		<div class="upgradeIcon"><span>🏛️</span></div>
+		<div class="upgradeInfo">
+			<div class="upgradeName">67 Temple</div>
+			<div class="upgradeEffect">Increase passive income by +5000000/sec</div>
+		</div>
+		<div class="upgradeCost">Cost: <span id="costTemple">125000000</span></div>
+		<button id="upgradeTemple" class="upgradeBtn">Buy</button>
+	</div>
+</div>
+
+<div class="upgradeItem">
+	<div class="upgradeCard">
+		<div class="upgradeIcon"><span>🖱️</span></div>
+		<div class="upgradeInfo">
+			<div class="upgradeName">Gold Cursor</div>
+			<div class="upgradeEffect">Increase click power by +2000000</div>
+		</div>
+		<div class="upgradeCost">Cost: <span id="costGoldCursor">400000000</span></div>
+		<button id="upgradeGoldCursor" class="upgradeBtn">Buy</button>
+	</div>
+</div>
+
+<div class="upgradeItem">
+	<div class="upgradeCard">
+		<div class="upgradeIcon"><span>🚀</span></div>
+		<div class="upgradeInfo">
+			<div class="upgradeName">67 Rocket</div>
+			<div class="upgradeEffect">Increase passive income by +100000000/sec</div>
+		</div>
+		<div class="upgradeCost">Cost: <span id="costRocket">5000000000</span></div>
+		<button id="upgradeRocket" class="upgradeBtn">Buy</button>
+	</div>
+</div>
+
+<div class="upgradeItem">
+	<div class="upgradeCard">
+		<div class="upgradeIcon"><span>🧍</span></div>
+		<div class="upgradeInfo">
+			<div class="upgradeName">67 Man</div>
+			<div class="upgradeEffect">Increase passive income by +5000000000/sec</div>
+		</div>
+		<div class="upgradeCost">Cost: <span id="costMan">100000000000</span></div>
+		<button id="upgradeMan" class="upgradeBtn">Buy</button>
+	</div>
 </div>
 
 </div>

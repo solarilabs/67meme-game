@@ -1209,18 +1209,44 @@ body.reach .stop-btn {
 }
 
 .floating {
+    /* Deprecated: no longer used */
+}
+
+.floating67 {
     position: absolute;
-    font-size: 2rem;
-    animation: floatUp 1s forwards;
-    font-weight: 700;
-    color: #ffd700;
-    text-shadow: 2px 2px 8px #000a, 0 0 12px #ffd70099;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #FFD700;
+    text-shadow:
+        0 0 10px #FFD700,
+        0 0 20px #FFA500,
+        0 0 30px #FF69B4,
+        0 0 40px #FF4500,
+        3px 3px 0px rgba(0,0,0,0.3);
     pointer-events: none;
     z-index: 100;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0.95;
+    transform: translate(-50%, -50%) rotate(var(--rot,0deg));
+    opacity: 0.98;
+    animation: float67Up 0.8s ease-out forwards;
+    will-change: transform, opacity;
+}
+
+@keyframes float67Up {
+    0% {
+        opacity: 0.98;
+        transform: translate(-50%, -50%) scale(1) rotate(var(--rot,0deg));
+    }
+    60% {
+        opacity: 1;
+        transform: translate(-50%, -90%) scale(1.12) rotate(var(--rot,0deg));
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -160%) scale(1.18) rotate(var(--rot,0deg));
+    }
+}
 }
 
 @keyframes floatUp {

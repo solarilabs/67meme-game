@@ -524,11 +524,16 @@ clickButton.addEventListener("click", (e) => {
 
     clickButton.classList.add("bounce");
 
-    // Floating number feedback
+    // Spawn glowing 67 numbers
     const rect = clickButton.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const clickY = e.clientY - rect.top;
-    spawnNumber(clickX, clickY, clickPower);
+    for (let i = 0; i < clickPower; i++) {
+        // Slight random offset for each
+        const offsetX = clickX + (Math.random() - 0.5) * 40;
+        const offsetY = clickY + (Math.random() - 0.5) * 24;
+        spawnGlowing67(offsetX, offsetY);
+    }
 
     setTimeout(() => {
         clickButton.classList.remove("bounce");
@@ -643,16 +648,26 @@ setInterval(() => {
 }, 1000);
 
 function spawnNumber(x, y, power) {
+    // Deprecated: no longer used
+}
+
+function spawnGlowing67(x, y) {
     const el = document.createElement("div");
-    el.className = "floating";
-    el.textContent = "+" + power;
-    // Centered relative to tile
+    el.className = "floating67";
+    el.textContent = "67";
+    // Position relative to button
     el.style.left = (x + clickButton.offsetLeft - 40) + "px";
     el.style.top = (y + clickButton.offsetTop + 40) + "px";
+    // Random rotation
+    const rot = (Math.random() - 0.5) * 32;
+    el.style.transform = `translate(-50%, -50%) rotate(${rot}deg)`;
     floating.appendChild(el);
     setTimeout(() => {
+        el.style.opacity = 0;
+    }, 700);
+    setTimeout(() => {
         el.remove();
-    }, 1000);
+    }, 800);
 }
 
 updateScore();

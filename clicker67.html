@@ -12,17 +12,14 @@
 
 <body class="clicker-page">
 
+
 <div class="topbar">
-
-<button onclick="window.location.href='index.html'">🏠</button>
-
-<h1>67 Clicker</h1>
-
-<div id="shopButton" class="shopButton">
-🛒 Shop
-<span id="shopNotification" class="shopNotification">1</span>
-</div>
-
+	<button onclick="window.location.href='index.html'">🏠</button>
+	<h1>67 Clicker</h1>
+	<div id="shopButton" class="shopButton">🛒 Shop
+		<span id="shopNotification" class="shopNotification">1</span>
+	</div>
+	<button id="achievementsBtn" class="shopButton" style="margin-left:8px;background:linear-gradient(135deg,#00c853,#b2ff59);color:#222;">🏆 Achievements</button>
 </div>
 
 
@@ -33,18 +30,22 @@
 	<div class="score-bar">
 		67s: <span id="score">0</span>
 	</div>
+	<div class="click-power-indicator" style="margin-bottom:4px;font-size:1.1rem;color:#00c853;font-weight:600;">
+		Click Power: <span id="clickPowerDisplay">+1</span>
+	</div>
 	<div class="auto-bar">
 		67 per second: <span id="autoPowerDisplay">0</span>
 	</div>
 </div>
 
 <div class="tile-center">
-	<div id="clickButton" class="click67">67</div>
+	<div id="clickButton" class="arcade-67">67</div>
 </div>
 </div>
 
 
 <div id="shopPanel" class="shopPanel">
+
 
 <div class="shopHeader">
 <h2>Shop</h2>
@@ -78,10 +79,95 @@
 <button id="upgradeFactory" class="upgradeBtn">Buy</button>
 </div>
 
+<!-- New Upgrades -->
+<div class="upgradeItem">
+<div class="upgradeInfo">
+<div class="upgradeName">67 Mine</div>
+<div class="upgradeEffect">+100/sec</div>
+</div>
+<div class="upgradeCost">Cost: 6500</div>
+<button id="upgradeMine" class="upgradeBtn">Buy</button>
+</div>
+
+<div class="upgradeItem">
+<div class="upgradeInfo">
+<div class="upgradeName">Silver Cursor</div>
+<div class="upgradeEffect">+2000 per click</div>
+</div>
+<div class="upgradeCost">Cost: 150000</div>
+<button id="upgradeSilverCursor" class="upgradeBtn">Buy</button>
+</div>
+
+<div class="upgradeItem">
+<div class="upgradeInfo">
+<div class="upgradeName">67 Factory</div>
+<div class="upgradeEffect">+15000/sec</div>
+</div>
+<div class="upgradeCost">Cost: 2000000</div>
+<button id="upgradeFactory2" class="upgradeBtn">Buy</button>
+</div>
+
+<div class="upgradeItem">
+<div class="upgradeInfo">
+<div class="upgradeName">67 Lab</div>
+<div class="upgradeEffect">+250000/sec</div>
+</div>
+<div class="upgradeCost">Cost: 20000000</div>
+<button id="upgradeLab" class="upgradeBtn">Buy</button>
+</div>
+
+<div class="upgradeItem">
+<div class="upgradeInfo">
+<div class="upgradeName">67 Temple</div>
+<div class="upgradeEffect">+5000000/sec</div>
+</div>
+<div class="upgradeCost">Cost: 125000000</div>
+<button id="upgradeTemple" class="upgradeBtn">Buy</button>
+</div>
+
+<div class="upgradeItem">
+<div class="upgradeInfo">
+<div class="upgradeName">Gold Cursor</div>
+<div class="upgradeEffect">+2000000 per click</div>
+</div>
+<div class="upgradeCost">Cost: 400000000</div>
+<button id="upgradeGoldCursor" class="upgradeBtn">Buy</button>
+</div>
+
+<div class="upgradeItem">
+<div class="upgradeInfo">
+<div class="upgradeName">67 Rocket</div>
+<div class="upgradeEffect">+100000000/sec</div>
+</div>
+<div class="upgradeCost">Cost: 5000000000</div>
+<button id="upgradeRocket" class="upgradeBtn">Buy</button>
+</div>
+
+<div class="upgradeItem">
+<div class="upgradeInfo">
+<div class="upgradeName">67 Man</div>
+<div class="upgradeEffect">+5000000000/sec</div>
+</div>
+<div class="upgradeCost">Cost: 100000000000</div>
+<button id="upgradeMan" class="upgradeBtn">Buy</button>
+</div>
+
 </div>
 
 
 <div id="floatingNumbers"></div>
+
+<!-- Achievement Notification Popup -->
+<div id="achievementPopup" class="achievement-popup" style="display:none"></div>
+
+<!-- Achievement Panel -->
+<div id="achievementPanel" class="achievement-panel" style="display:none">
+	<div class="achievement-panel-header">
+		<span>Achievements</span>
+		<button id="closeAchievements" class="closeShop">×</button>
+	</div>
+	<div id="achievementList" class="achievement-list"></div>
+</div>
 
 <script src="script.js"></script>
 

@@ -383,6 +383,69 @@ function initReach67() {
 
 // --------- Clicker 67 Game Implementation ---------
 function initClicker67(){
+// Achievement system
+const achievementPopup = document.getElementById("achievementPopup");
+const achievementsBtn = document.getElementById("achievementsBtn");
+const achievementPanel = document.getElementById("achievementPanel");
+const closeAchievements = document.getElementById("closeAchievements");
+const achievementList = document.getElementById("achievementList");
+
+const achievementMilestones = [67, 670, 6700, 67000, 670000, 6700000];
+const achievementNames = [
+    "First 67",
+    "67 x 10",
+    "67 x 100",
+    "67 x 1000",
+    "67 x 10000",
+    "67 x 100000"
+];
+let unlockedAchievements = [];
+
+function checkAchievements() {
+    for (let i = 0; i < achievementMilestones.length; i++) {
+        if (score >= achievementMilestones[i] && !unlockedAchievements.includes(i)) {
+            unlockedAchievements.push(i);
+            showAchievementPopup(achievementNames[i]);
+            updateAchievementPanel();
+        }
+    }
+}
+
+function showAchievementPopup(name) {
+    achievementPopup.textContent = `Achievement Unlocked\n"${name}"`;
+    achievementPopup.style.display = "block";
+    achievementPopup.classList.remove("fadeout");
+    achievementPopup.classList.add("fadein");
+    setTimeout(() => {
+        achievementPopup.classList.remove("fadein");
+        achievementPopup.classList.add("fadeout");
+        setTimeout(() => {
+            achievementPopup.style.display = "none";
+        }, 1200);
+    }, 1800);
+}
+
+function updateAchievementPanel() {
+    achievementList.innerHTML = "";
+    if (unlockedAchievements.length === 0) {
+        achievementList.innerHTML = '<div class="achievement-empty">No achievements unlocked yet.</div>';
+        return;
+    }
+    for (let idx of unlockedAchievements) {
+        const item = document.createElement("div");
+        item.className = "achievement-item";
+        item.textContent = achievementNames[idx];
+        achievementList.appendChild(item);
+    }
+}
+
+achievementsBtn.addEventListener("click", () => {
+    achievementPanel.style.display = "block";
+    updateAchievementPanel();
+});
+closeAchievements.addEventListener("click", () => {
+    achievementPanel.style.display = "none";
+});
 
 let score = 0;
 let clickPower = 1;
@@ -390,11 +453,21 @@ let autoPower = 0;
 
 const scoreDisplay = document.getElementById("score");
 const autoPowerDisplay = document.getElementById("autoPowerDisplay");
+const clickPowerDisplay = document.getElementById("clickPowerDisplay");
 const clickButton = document.getElementById("clickButton");
+
 
 const upgradeClick = document.getElementById("upgradeClick");
 const upgradeAuto = document.getElementById("upgradeAuto");
 const upgradeFactory = document.getElementById("upgradeFactory");
+const upgradeMine = document.getElementById("upgradeMine");
+const upgradeSilverCursor = document.getElementById("upgradeSilverCursor");
+const upgradeFactory2 = document.getElementById("upgradeFactory2");
+const upgradeLab = document.getElementById("upgradeLab");
+const upgradeTemple = document.getElementById("upgradeTemple");
+const upgradeGoldCursor = document.getElementById("upgradeGoldCursor");
+const upgradeRocket = document.getElementById("upgradeRocket");
+const upgradeMan = document.getElementById("upgradeMan");
 
 const floating = document.getElementById("floatingNumbers");
 const shopButton = document.getElementById("shopButton");
@@ -407,9 +480,14 @@ let shopOpen = false;
 function updateScore() {
     scoreDisplay.textContent = score;
     updateShopNotification();
+    checkAchievements();
+    updateClickPowerIndicator();
 }
 
 function updateAutoPower() {
+    function updateClickPowerIndicator() {
+        clickPowerDisplay.textContent = "+" + clickPower;
+    }
     autoPowerDisplay.textContent = autoPower;
 }
 
@@ -457,11 +535,13 @@ clickButton.addEventListener("click", (e) => {
     }, 150);
 });
 
+
 upgradeClick.addEventListener("click", () => {
     if (score >= 10) {
         score -= 10;
         clickPower += 1;
         updateScore();
+        updateClickPowerIndicator();
     }
 });
 
@@ -478,6 +558,80 @@ upgradeFactory.addEventListener("click", () => {
     if (score >= 250) {
         score -= 250;
         autoPower += 5;
+        updateScore();
+        updateAutoPower();
+    }
+});
+
+// New Upgrades
+upgradeMine.addEventListener("click", () => {
+    if (score >= 6500) {
+        score -= 6500;
+        autoPower += 100;
+        updateScore();
+        updateAutoPower();
+    }
+});
+
+upgradeSilverCursor.addEventListener("click", () => {
+    if (score >= 150000) {
+        score -= 150000;
+        clickPower += 2000;
+        updateScore();
+        updateClickPowerIndicator();
+    }
+});
+
+upgradeFactory2.addEventListener("click", () => {
+    if (score >= 2000000) {
+        score -= 2000000;
+        autoPower += 15000;
+        updateScore();
+        updateAutoPower();
+    }
+});
+
+upgradeLab.addEventListener("click", () => {
+    if (score >= 20000000) {
+        score -= 20000000;
+        autoPower += 250000;
+        updateScore();
+        updateAutoPower();
+    }
+});
+
+upgradeTemple.addEventListener("click", () => {
+    if (score >= 125000000) {
+        score -= 125000000;
+        autoPower += 5000000;
+        updateScore();
+        updateAutoPower();
+    }
+});
+
+upgradeGoldCursor.addEventListener("click", () => {
+    if (score >= 400000000) {
+        score -= 400000000;
+        clickPower += 2000000;
+        updateScore();
+        updateClickPowerIndicator();
+    }
+});
+
+upgradeRocket.addEventListener("click", () => {
+    if (score >= 5000000000) {
+        score -= 5000000000;
+        autoPower += 100000000;
+        updateScore();
+        updateAutoPower();
+        updateClickPowerIndicator();
+    }
+});
+
+upgradeMan.addEventListener("click", () => {
+    if (score >= 100000000000) {
+        score -= 100000000000;
+        autoPower += 5000000000;
         updateScore();
         updateAutoPower();
     }
